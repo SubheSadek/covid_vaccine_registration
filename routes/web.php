@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VaccineCenter\VaccineCenterController;
 use App\Http\Controllers\VaccineRegistration\VaccineRegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,9 @@ Route::get('/', function () {
 
 Route::controller(VaccineRegistrationController::class)->group(function ($route) {
     $route->post('vaccine-registration', 'vaccineRegistration')->name('vaccine.registration');
+});
+
+
+Route::controller(VaccineCenterController::class)->group(function ($route) {
+    $route->get('vaccine-center-list', 'vaccineCenterList')->name('vaccine.center.list');
 });
