@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nid', 20)->unique();
             $table->text('address');
             $table->date('birth_date');
+            $table->index(['name', 'phone', 'email', 'nid']);
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('center_name');
             $table->integer('vaccine_per_day');
+            $table->index(['center_name']);
             $table->timestamps();
         });
     }
