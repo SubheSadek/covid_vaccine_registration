@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\VaccineCenter;
 use Database\Factories\VaccineCenterFactory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

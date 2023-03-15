@@ -1,6 +1,5 @@
 <?php
 
-
 function withSuccess($data = null, $message = null)
 {
     return customResponse($data, true, 200, $message);

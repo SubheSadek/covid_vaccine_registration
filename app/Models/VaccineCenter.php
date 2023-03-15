@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VaccineCenter extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'center_name',
-        'vaccine_per_day'
+        'vaccine_per_day',
     ];
 }

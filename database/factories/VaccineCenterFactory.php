@@ -17,8 +17,8 @@ class VaccineCenterFactory extends Factory
     public function definition(): array
     {
         return [
-            'center_name'  => fake()->city(),
-            'vaccine_per_day'   => fake()->numberBetween(500, 1000)
+            'center_name' => fake()->city(),
+            'vaccine_per_day' => fake()->numberBetween(500, 1000),
         ];
     }
 }

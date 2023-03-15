@@ -23,7 +23,6 @@ Route::controller(VaccineRegistrationController::class)->group(function ($route)
     $route->post('vaccine-registration', 'vaccineRegistration')->name('vaccine.registration');
 });
 
-
 Route::controller(VaccineCenterController::class)->group(function ($route) {
     $route->get('vaccine-center-list', 'vaccineCenterList')->name('vaccine.center.list');
 });

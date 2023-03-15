@@ -10,7 +10,16 @@ class VaccineCenterController extends Controller
 {
     public function vaccineCenterList(Request $request)
     {
-        $centers = VaccineCenter::all();
+        $search = $request['search'] ?? null;
+        $lastId = $request['lastId'] ?? null;
+        $centers = VaccineCenter::when($search, function ($q, $search) {
+            $q->where('center_name', 'like', '%'.$search.'%');
+        })->when($lastId, function ($q, $lastId) {
+            $q->where('id', '<', $lastId);
+        })
+            ->limit(10)->latest('id')
+            ->get(['id', 'center_name', 'vaccine_per_day']);
+
         return withSuccess($centers);
     }
 }
