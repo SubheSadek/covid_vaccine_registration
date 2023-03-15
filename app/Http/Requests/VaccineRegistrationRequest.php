@@ -27,7 +27,7 @@ class VaccineRegistrationRequest extends FormRequest
             'phone' => 'required|string|size:14|regex:/^\+8801[3-9]\d{8}$/',
             'email' => 'required|email|max:255',
             'nid' => 'required|string|size:17',
-            'address' => 'required|string',
+            'address' => 'nullable|string',
             'birth_date' => 'required|date:Y-m-d',
         ];
     }
