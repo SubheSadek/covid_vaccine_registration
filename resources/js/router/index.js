@@ -13,15 +13,15 @@ const routes = [
     },
 
     {
-        path: "/register",
-        name: "register",
-        component: () => import("../views/Auth/SignUp.vue"),
+        path: "/vaccine-registration",
+        name: "vaccineRegistration",
+        component: () =>
+            import("../views/VaccineRegistration/VaccineRegistraion.vue"),
         meta: {
-            title: "SignUp",
-            menuName: "SignUp",
+            title: "Vaccine Registration",
+            menuName: "Vaccine Registration",
             icon: null,
             status: 0,
-            isAuthenticated: true,
         },
     },
 ];

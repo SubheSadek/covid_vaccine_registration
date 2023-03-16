@@ -1,18 +1,19 @@
 const form = {
-    vaccine_center_id: null,
-    name: null,
-    phone: null,
-    email: null,
-    nid: null,
-    address: null,
-    birth_date: null,
+    vaccine_center_id: 2,
+    name: "",
+    phone: "",
+    email: "",
+    nid: "",
+    address: "",
+    birth_date: "",
 };
+
 const ruleValidate = {
     name: [
         { required: true, message: "Please input your name", trigger: "blur" },
         {
             max: 255,
-            message: "Name must not be greater than 255 charecters",
+            message: "Name must not be greater than 255 characters",
             trigger: "blur",
         },
     ],
@@ -25,15 +26,23 @@ const ruleValidate = {
         },
     ],
     phone: [
-        { required: true, message: "Please input your phpne", trigger: "blur" },
+        { required: true, message: "Please input your phone", trigger: "blur" },
     ],
     nid: [
-        { required: true, message: "Please input your phpne", trigger: "blur" },
+        { required: true, message: "Please input your NID", trigger: "blur" },
     ],
     birth_date: [
         {
             required: true,
             message: "Please select your birth date",
+            trigger: "blur",
+        },
+    ],
+    vaccine_center_id: [
+        {
+            required: true,
+            type: "number",
+            message: "Please select a vaccine center",
             trigger: "blur",
         },
     ],

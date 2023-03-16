@@ -24,11 +24,18 @@ class VaccineRegistrationRequest extends FormRequest
         return [
             'vaccine_center_id' => 'required|integer|exists:vaccine_centers,id',
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|size:14|regex:/^\+8801[3-9]\d{8}$/',
-            'email' => 'required|email|max:255',
-            'nid' => 'required|string|size:17',
+            'phone' => 'required|string|size:14|regex:/^\+8801[3-9]\d{8}$/|unique:vaccine_registrations,phone',
+            'email' => 'required|email|max:255|unique:vaccine_registrations,email',
+            'nid' => 'required|string|size:17|unique:vaccine_registrations,nid',
             'address' => 'nullable|string',
             'birth_date' => 'required|date:Y-m-d',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nid.unique' => 'You are already registered for vaccine',
         ];
     }
 }

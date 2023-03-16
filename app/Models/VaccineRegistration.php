@@ -17,5 +17,12 @@ class VaccineRegistration extends Model
         'nid',
         'address',
         'birth_date',
+        'scheduled_date',
+        'registration_status'
     ];
+
+    public function setMyStringAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
 }

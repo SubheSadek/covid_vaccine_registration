@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::controller(VaccineRegistrationController::class)->group(function ($route) {
-    $route->post('vaccine-registration', 'vaccineRegistration')->name('vaccine.registration');
+    $route->post('register-vccine', 'registerVaccine')->name('register.vccine');
 });
 
 Route::controller(VaccineCenterController::class)->group(function ($route) {

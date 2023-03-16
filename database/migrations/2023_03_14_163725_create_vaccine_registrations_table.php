@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('nid', 20)->unique();
             $table->text('address');
             $table->date('birth_date');
+            $table->date('scheduled_date')->nullable();
+            $table->enum('registration_status', ['SCHEDULED', 'VACCINATED'])->default('SCHEDULED');
             $table->index(['name', 'phone', 'email', 'nid']);
             $table->timestamps();
         });

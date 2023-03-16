@@ -45,11 +45,11 @@
 
                                 <Col span="12">
                                     <div class="fv-row mb-10">
-                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Phone" prop="phone">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Phone (+8801700000000)" prop="phone">
                                             <Input 
                                                 show-word-limit maxlength="14"
                                                 v-model.trim="form.phone" 
-                                                type="text" placeholder="Phone"
+                                                type="text" placeholder="+8801700000000"
                                                 autocomplete="off"  size="large">
                                             </Input>
                                         </FormItem>
@@ -103,8 +103,10 @@
                                 <Col span="24">
                                     <div class="fv-row mb-10">
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Address" prop="address">
-                                            <Input v-model.trim="form.address" :rows="4" type="textarea" placeholder="Address"
-                                                autocomplete="off">
+                                            <Input 
+                                            v-model.trim="form.address" :rows="4" type="textarea"
+                                            placeholder="e.g. House 10, Road 1/A, Block A&#10;Mohammadpur, Dhaka - 1207"
+                                            autocomplete="off">
                                             </Input>
                                         </FormItem>
                                     </div>
@@ -128,7 +130,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> 
 
     </div>
 </template>
@@ -156,9 +158,9 @@ export default {
                     this.isLoading = true;
 
                     const formData = this.formatFormData(this.form);
-                    const res = await this.callApi('POST', '/web/auth/register', formData);
+                    const res = await this.callApi('POST', '/register-vccine', formData);
                     if (res.status == 200) {
-                        window.location.href = "/";
+                        // window.location.href = "/";
                     }
                     this.isLoading = false;
                 }
