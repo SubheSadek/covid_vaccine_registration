@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class VaccineCenterController extends Controller
 {
+    //It's scrollable vaccine list
     public function vaccineCenterList(Request $request)
     {
         $search = $request['search'] ?? null;
