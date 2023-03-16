@@ -26,3 +26,8 @@ Route::controller(VaccineRegistrationController::class)->group(function ($route)
 Route::controller(VaccineCenterController::class)->group(function ($route) {
     $route->get('vaccine-center-list', 'vaccineCenterList')->name('vaccine.center.list');
 });
+
+
+Route::get('/{all?}', function () {
+    return view('welcome');
+})->where(['all' => '.*']);

@@ -2,99 +2,126 @@
     <div class="d-flex flex-column flex-root">
         <!--begin::Authentication - Sign-in -->
         <div class="d-flex flex-column flex-lg-row flex-column-fluid">
-            <!--begin::Aside-->
-            <div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative">
-
-                <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
-                    <!--begin::Content-->
-                    <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
-                        <!--begin::Logo-->
-                        <router-link to="/" class="py-9 mb-5">
-                            <img alt="Logo" :src="`${this.baseUrl}assets/media/logos/logo-2.svg`" class="h-60px" />
-                        </router-link>
-                        <!--end::Logo-->
-                        <!--begin::Title-->
-                        <h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #986923;">Covid Vaccine Registration</h1>
-                        <!--end::Title-->
-                        <!--begin::Description-->
-                        <p class="fw-bold fs-2" style="color: #986923;">Free Vaccine Provided here..
-                        </p>
-                        <!--end::Description-->
-                    </div>
-
-                    <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px"
-                        style="background-image: url(assets/media/illustrations/sketchy-1/13.png)">
-                        <!-- <img src="assets/media/illustrations/sketchy-1/13.png" alt=""> -->
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end::Aside-->
-            <!--begin::Body-->
-            <div class="d-flex flex-column flex-lg-row-fluid py-10">
+            
+            <div class="d-flex flex-column flex-lg-row-fluid">
                 <!--begin::Content-->
-                <div class="d-flex flex-center flex-column flex-column-fluid">
+                <div class="d-flex flex-center flex-column flex-column-fluid py-10">
                     <!--begin::Wrapper-->
-                    <div class="w-lg-500px p-10 p-lg-15 mx-auto" style="margin-top:10% !important;">
+                    <div class="w-lg-1000px p-10 p-lg-15 mx-auto _box_shadow" style="border-radius: 6px;">
                         <!--begin::Form-->
-                        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" class="form w-100">
+                        <Form ref="form" :model="form" :rules="ruleValidate" class="form w-100">
 
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
                                 <h1 class="text-dark mb-3">SignUp to Referral</h1>
                             </div>
+                            
+                            <Row :gutter="16">
+                                <Col span="12">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Name" prop="name">
+                                            <Input 
+                                                show-word-limit maxlength="255"
+                                                v-model.trim="form.name" 
+                                                type="text" placeholder="Name"
+                                                autocomplete="off" size="large">
+                                            </Input>
+                                        </FormItem>
+                                    </div>
+                                </Col>
 
-                            <div class="fv-row mb-10">
-                                <FormItem class="form-label fs-6 fw-bolder text-dark" label="Name" prop="name">
-                                    <Input v-model.trim="formValidate.name" type="text" placeholder="Name"
-                                        autocomplete="off">
-                                    </Input>
-                                </FormItem>
-                            </div>
+                                <Col span="12">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Email" prop="email">
+                                            <Input 
+                                                show-word-limit maxlength="255"
+                                                v-model.trim="form.email" 
+                                                type="text" placeholder="Email"
+                                                autocomplete="off" size="large">
+                                            </Input>
+                                        </FormItem>
+                                    </div>
+                                </Col>
 
-                            <div class="fv-row mb-10">
-                                <FormItem class="form-label fs-6 fw-bolder text-dark" label="Email" prop="email">
-                                    <Input v-model.trim="formValidate.email" type="text" placeholder="Email"
-                                        autocomplete="off">
-                                    </Input>
-                                </FormItem>
-                            </div>
+                                <Col span="12">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Phone" prop="phone">
+                                            <Input 
+                                                show-word-limit maxlength="14"
+                                                v-model.trim="form.phone" 
+                                                type="text" placeholder="Phone"
+                                                autocomplete="off"  size="large">
+                                            </Input>
+                                        </FormItem>
+                                    </div>
+                                </Col>
 
-                            <div class="fv-row mb-10">
-                                <FormItem class="form-label fw-bolder text-dark fs-6 mb-0" label="Password" prop="password">
-                                    <Input v-model.trim="formValidate.password" type="password" password
-                                        placeholder="Password" autocomplete="off">
-                                    </Input>
-                                </FormItem>
-                            </div>
+                                <Col span="12">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="NID" prop="nid">
+                                            <Input 
+                                                show-word-limit maxlength="17"
+                                                v-model.trim="form.nid" 
+                                                type="text" placeholder="NID"
+                                                autocomplete="off" size="large">
+                                            </Input>
+                                        </FormItem>
+                                    </div>
+                                </Col>
 
-                            <div class="fv-row mb-10">
-                                <FormItem class="form-label fw-bolder text-dark fs-6 mb-0" label="Confirm Password"
-                                    prop="password_confirmation">
-                                    <Input @on-enter="handleSubmit('formValidate')"
-                                        v-model.trim="formValidate.password_confirmation" type="password" password
-                                        placeholder="Confirm Password" autocomplete="off">
-                                    </Input>
-                                </FormItem>
-                            </div>
+                                <Col span="12">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Birth Date" prop="birth_date">
+                                            
+                                                <DatePicker
+                                                    @on-change="e => form.birth_date = e"
+                                                    :model-value="form.birth_date"
+                                                    format="yyyy-MM-dd" clearable type="date"
+                                                    placeholder="Select birth date"
+                                                    style="width: 100%" size="large"
+                                                />
+
+                                        </FormItem>
+                                    </div>
+                                </Col>
+
+                                <Col span="12">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Vaccine Center" prop="vaccine_center_id">
+                                            
+                                            <SelectSearchOption
+                                                v-model:formValue="form.vaccine_center_id"
+                                                :initialData="centers"
+                                                :title="`Search by center name`"
+                                                :url="`vaccine-center-list`"
+                                            />
+                                               
+                                        </FormItem>
+                                    </div>
+                                </Col>
+
+                                <Col span="24">
+                                    <div class="fv-row mb-10">
+                                        <FormItem class="form-label fs-6 fw-bolder text-dark" label="Address" prop="address">
+                                            <Input v-model.trim="form.address" :rows="4" type="textarea" placeholder="Address"
+                                                autocomplete="off">
+                                            </Input>
+                                        </FormItem>
+                                    </div>
+                                </Col>
+
+                            </Row>
 
                             <div class="text-center">
 
                                 <Button :loading="isLoading" shape="circle" style="height: 51px;" :disabled="isLoading"
-                                    @click="handleSubmit('formValidate')" size="large" type="primary" long>
+                                    @click="handleSubmit('form')" size="large" type="primary" long>
                                     {{ isLoading ? 'Please wait ...' : 'Continue' }}
                                 </Button>
 
                             </div>
 
                         </Form>
-
-                        <div class="_login_redirect">
-                            <router-link to="/">
-                                Already have an account ? Login.
-                            </router-link>
-                        </div>
 
                     </div>
 
@@ -107,15 +134,21 @@
 </template>
 
 <script>
+import SelectSearchOption from '../../Helpers/GlobalComponent/selectSearchOption.vue';
 export default {
     name: 'SignUp',
+    components: {
+        SelectSearchOption
+    },
     data() {
-        const formValidate = {
+        const form = {
+            vaccine_center_id: null,
             name: null,
+            phone: null,
             email: null,
-            password: null,
-            password_confirmation: null,
-            referred_code: null,
+            nid: null,
+            address: null,
+            birth_date: null
         };
         const ruleValidate = {
             name: [
@@ -125,29 +158,21 @@ export default {
             email: [
                 { required: true, message: 'Please input your email', trigger: 'blur' },
                 { type: 'email', message: 'Please input a valid email', trigger: 'blur' },
-                { max: 255, message: 'Email must not be greater than 255 charecters', trigger: 'blur' },
             ],
-            password: [
-                { required: true, message: 'Please input your password', trigger: 'blur' },
-                { min: 6, message: 'Password must be at least 6 characters', trigger: 'blur' },
+            phone: [
+                { required: true, message: 'Please input your phpne', trigger: 'blur' },
             ],
-            password_confirmation: [
-                {
-                    validator: (rule, value, callback) => {
-                        if (this.formValidate.password && value === '') {
-                            callback(new Error('Please input password confirmation'));
-                        } else if (this.formValidate.password && value !== this.formValidate.password) {
-                            callback(new Error('Password confirmation is not same with password'));
-                        } else {
-                            callback();
-                        }
-                    }, trigger: 'blur'
-                },
-            ]
+            nid: [
+                { required: true, message: 'Please input your phpne', trigger: 'blur' },
+            ],
+            birth_date: [
+                { required: true, message: 'Please select your birth date', trigger: 'blur' },
+            ],
         };
         return {
-            formValidate,
+            form,
             ruleValidate,
+            centers: [],
         };
     },
 
@@ -157,7 +182,7 @@ export default {
                 if (valid) {
                     this.isLoading = true;
 
-                    const formData = this.formatFormData(this.formValidate);
+                    const formData = this.formatFormData(this.form);
                     const res = await this.callApi('POST', '/web/auth/register', formData);
                     if (res.status == 200) {
                         window.location.href = "/";
@@ -177,7 +202,7 @@ export default {
     created() {
         let code = this.$route.query.code || null;
         if (code) {
-            this.formValidate.referred_code = code;
+            this.form.referred_code = code;
         }
     }
 }
