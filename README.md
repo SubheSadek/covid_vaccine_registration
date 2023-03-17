@@ -111,6 +111,20 @@ sail artisan run:schedule
 
 <b> Note: </b> Task Scheduler will update registration status when the scheduled_date exceeded.
 
+## SMS notification
+
+If an additional requirement of sending SMS notifications is given in the future, the following changes need to be made in the code:
+
+1. Have to add a new function to send SMS notifications, or modify the existing function to include SMS notifications.
+
+2. Make update the code that sends notifications to call the SMS function in addition to the email function.
+
+3. Will update any relevant variables or constants to include information about the SMS notification, such as the API key for the SMS service.
+
+4. And finally have to update the README file to reflect the new requirement and describe the changes made to the code.
+
+It is recommended to follow the best practices of modular programming and keep the code organized and well-commented, so that it is easy to understand and modify in the future.
+
 ## PHP Unit Test Case
 
 This repository contains a set of unit tests for a PHP application
