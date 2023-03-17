@@ -1,6 +1,6 @@
 # CovidVaccineRegistrationTestProject
 
-This is a starter project for a referral website built with Laravel 10, Vue.js 3, Vite, and Laravel Queue.
+This is a sample project for covid vaccine registration with Laravel 10, Vue.js 3, Vite.
 
 ## Laravel Sail (Docker) Installation
 
@@ -20,13 +20,13 @@ To install this project, follow these steps:
 1. Clone the repository to your local machine:
 
 ```python
-git clone https://github.com/subhesadek/referral_site.git
+git clone https://github.com/subhesadek/covid_vaccine_registration.git
 ```
 
 2. Navigate to the project directory:
 
 ```python
-cd referral_site
+cd covid_vaccine_registration
 ```
 
 3. Set up the environment variables by creating a copy of the `.env.example` file and renaming it to `.env`:
@@ -69,7 +69,13 @@ php artisan sail:install
 ./vendor/bin/sail up
 ```
 
-7. Generate the application key:
+7: Run the database migrations:
+
+```python
+sail artisan migrate
+```
+
+8: Generate the application key:
 
 ```python
 sail artisan key:generate
@@ -81,6 +87,40 @@ sail artisan key:generate
 sail npm install && sail npm run dev
 ```
 
+## Laravel Queue and SMTP Server Setup
+
+1. Start the Laravel Queue worker:
+
+```python
+sail artisan queue:work
+```
+
+2. Setup your SMTP email server:
+
+![Alt Text](https://github.com/SubheSadek/repo_images/blob/main/smtp_mail_setup.png)
+
+<b> Note: </b> Used queue for sending an Invitation mail before last night at 9pm from scheduled date.
+
+## Laravel Task Scheduling (Cron Job) setup
+
+1. Start the Laravel Task Scheduler:
+
+```python
+sail artisan run:schedule
+```
+
+<b> Note: </b> Task Scheduler will update registration status when the scheduled_date exceeded.
+
+## PHP Unit Test Case
+
+This repository contains a set of unit tests for a PHP application
+
+1. To run the tests, simply execute the following command from the root directory of the repository:
+
+```python
+sail artisan test
+```
+
 ## Manual Installation
 
 To install this project, follow these steps:
@@ -88,13 +128,13 @@ To install this project, follow these steps:
 1. Clone the repository to your local machine:
 
 ```python
-git clone https://github.com/subhesadek/referral_site.git
+git clone https://github.com/subhesadek/covid_vaccine_registration.git
 ```
 
 2. Navigate to the project directory:
 
 ```python
-cd referral_site
+cd covid_vaccine_registration
 ```
 
 3. Install the project dependencies:
@@ -133,53 +173,18 @@ npm run dev
 php artisan serve
 ```
 
-9. Start the Laravel Queue worker:
-
-```python
-php artisan queue:table
-```
-
-```python
-php artisan migrate
-```
-
-```python
-php artisan queue:work
-```
-
-10. Setup your SMTP email server:
-
-![Alt Text](https://github.com/SubheSadek/repo_images/blob/main/smtp_mail_setup.png)
-
 You should now be able to access the application at [http://localhost:8000](http://localhost:8000).
-
-## PHP Unit Test Case
-
-This repository contains a set of unit tests for a PHP application
-
-1. To run the tests, simply execute the following command from the root directory of the repository:
-
-```python
-php artisan test
-```
-
-For laravel sail
-
-```python
-sail artisan test
-```
-
-or
-
-```python
-./vendor/bin/phpunit
-```
 
 ## Usage
 
-The application has a simple referral system that allows users to share a referral link with their friends. When someone signs up using the referral link, the referrer earns a reward.
+To use the Covid vaccine registration site, follow these steps:
 
-To test the referral system, you can create a new user account and share your referral link with another user. When the other user signs up using the referral link, you should see a reward credited to your account.
+1. Visit the website at [http://localhost](http://localhost)
+2. Click on the "Haven't register yet ? Please register." link to create an account and provide your National ID (NID) number, name, age, and contact information.
+3. Once registered, you will receive notifications about the vaccine availability and registration status updates via email.
+4. If you want to check your current registration status, visit the website home page and and enter your NID number and the website will display your current registration status.
+
+Note: This website is for informational purposes only and does not provide medical advice. Please consult with your healthcare provider for any medical advice regarding COVID-19.
 
 ## License
 
