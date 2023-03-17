@@ -18,7 +18,7 @@ class VaccineRegistration extends Model
         'address',
         'birth_date',
         'scheduled_date',
-        'registration_status'
+        'registration_status',
     ];
 
     public function setMyStringAttribute($value)

@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -16,8 +15,8 @@ class VaccineNotification extends Mailable
     /**
      * Create a new message instance.
      */
-
     protected $emailData;
+
     public function __construct($emailData)
     {
         $this->emailData = $emailData;

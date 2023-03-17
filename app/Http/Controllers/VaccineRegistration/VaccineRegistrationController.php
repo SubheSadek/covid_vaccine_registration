@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class VaccineRegistrationController extends Controller
 {
     protected $regService;
+
     public function __construct(VaccineRegistrationService $regService)
     {
         $this->regService = $regService;
@@ -20,17 +21,16 @@ class VaccineRegistrationController extends Controller
 
     /**
      * Handles the registration of a new vaccine through a VaccineRegistrationRequest.
-     * 
+     *
      * Validates the request data and creates a new vaccine registration record using the provided
-     * vaccine_center_id. The scheduled date for the registration is obtained using the 
+     * vaccine_center_id. The scheduled date for the registration is obtained using the
      * getNextAvailableDateForCenter method from the regService.
-     * 
-     * @param VaccineRegistrationRequest $request The request object containing the vaccine registration data.
+     *
+     * @param  VaccineRegistrationRequest  $request The request object containing the vaccine registration data.
      * @return mixed Returns a success message if the registration is successful. Otherwise, returns an error message with the exception message.
+     *
      * @throws \Exception Throws an exception if an error occurs during the registration process.
-     * 
      */
-
     public function registerVaccine(VaccineRegistrationRequest $request)
     {
         $requestData = $request->validated();
@@ -48,9 +48,11 @@ class VaccineRegistrationController extends Controller
             $notification_time = Carbon::parse($emailData['scheduled_date'])->subDay()->setTimezone('Asia/Dhaka')->setTime(21, 0, 0);
             Mail::to($emailData['email'])->later($notification_time, new VaccineNotification($emailData));
             DB::commit();
+
             return withSuccess(null, 'Registration Successful');
         } catch (\Exception $e) {
             DB::rollBack();
+
             return withError($e->getMessage(), 400);
         }
     }
