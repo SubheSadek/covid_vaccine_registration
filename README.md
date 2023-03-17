@@ -1,66 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CovidVaccineRegistrationTestProject
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a starter project for a referral website built with Laravel 10, Vue.js 3, Vite, and Laravel Queue.
 
-## About Laravel
+## Laravel Sail (Docker) Installation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h3> Prerequisites </h3>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Before we get started, make sure that you have the following prerequisites installed on your local machine:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<ul>
+<li>PHP (minimum version: 8.2)</li>
+<li>Composer</li>
+<li>Docker (minimum version: 20.10)</li>
+<li>Git</li>
+</ul>
 
-## Learning Laravel
+To install this project, follow these steps:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the repository to your local machine:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```python
+git clone https://github.com/subhesadek/referral_site.git
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. Navigate to the project directory:
 
-## Laravel Sponsors
+```python
+cd referral_site
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Set up the environment variables by creating a copy of the `.env.example` file and renaming it to `.env`:
 
-### Premium Partners
+```python
+cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4: Install Laravel Sail:
 
-## Contributing
+```python
+composer require laravel/sail --dev
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This command will download and install Laravel Sail and its dependencies in your project's vendor directory.
 
-## Code of Conduct
+Or,
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```python
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
 
-## Security Vulnerabilities
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<b> Note: </b> If you encounter any issues or have any questions, feel free to check out the official [Laravel Documentation](https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects).
+
+5: Set up Laravel Sail
+
+```python
+php artisan sail:install
+```
+
+6: Start Laravel Sail
+
+```python
+./vendor/bin/sail up
+```
+
+7. Generate the application key:
+
+```python
+sail artisan key:generate
+```
+
+9: Install & setup NPM
+
+```python
+sail npm install && sail npm run dev
+```
+
+## Manual Installation
+
+To install this project, follow these steps:
+
+1. Clone the repository to your local machine:
+
+```python
+git clone https://github.com/subhesadek/referral_site.git
+```
+
+2. Navigate to the project directory:
+
+```python
+cd referral_site
+```
+
+3. Install the project dependencies:
+
+```python
+composer install && npm install
+```
+
+4. Set up the environment variables by creating a copy of the `.env.example` file and renaming it to `.env`:
+
+```python
+cp .env.example .env
+```
+
+5. Generate the application key:
+
+```python
+php artisan key:generate
+```
+
+6. Run the database migrations:
+
+```python
+php artisan migrate
+```
+
+7. Compile the frontend assets:
+
+```python
+npm run dev
+```
+
+8. Start the Laravel development server:
+
+```python
+php artisan serve
+```
+
+9. Start the Laravel Queue worker:
+
+```python
+php artisan queue:table
+```
+
+```python
+php artisan migrate
+```
+
+```python
+php artisan queue:work
+```
+
+10. Setup your SMTP email server:
+
+![Alt Text](https://github.com/SubheSadek/repo_images/blob/main/smtp_mail_setup.png)
+
+You should now be able to access the application at [http://localhost:8000](http://localhost:8000).
+
+## PHP Unit Test Case
+
+This repository contains a set of unit tests for a PHP application
+
+1. To run the tests, simply execute the following command from the root directory of the repository:
+
+```python
+php artisan test
+```
+
+For laravel sail
+
+```python
+sail artisan test
+```
+
+or
+
+```python
+./vendor/bin/phpunit
+```
+
+## Usage
+
+The application has a simple referral system that allows users to share a referral link with their friends. When someone signs up using the referral link, the referrer earns a reward.
+
+To test the referral system, you can create a new user account and share your referral link with another user. When the other user signs up using the referral link, you should see a reward credited to your account.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
