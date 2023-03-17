@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\VaccineRegistration;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShowRegistrationRequest;
 use App\Http\Requests\VaccineRegistrationRequest;
+use App\Http\Resources\RegistrationResource;
 use App\Mail\VaccineNotification;
 use App\Models\VaccineRegistration;
 use Illuminate\Support\Carbon;
@@ -55,5 +57,15 @@ class VaccineRegistrationController extends Controller
 
             return withError($e->getMessage(), 400);
         }
+    }
+
+    public function showRegistration(ShowRegistrationRequest $request)
+    {
+        $requestData = $request->validated();
+        $registration = VaccineRegistration::where($requestData)
+            ->with('center:id,center_name')
+            ->first(['id', 'scheduled_date', 'vaccine_center_id', 'registration_status']);
+
+        return withSuccess(new RegistrationResource($registration));
     }
 }

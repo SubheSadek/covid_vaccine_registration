@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::controller(VaccineRegistrationController::class)->group(function ($route) {
     $route->post('register-vccine', 'registerVaccine')->name('register.vccine');
+    $route->post('show-registration', 'showRegistration')->name('show.registration');
 });
 
 Route::controller(VaccineCenterController::class)->group(function ($route) {

@@ -1,13 +1,126 @@
 <template>
-    <div class="text-center">
-        <h2>
-            Hello ! it's home page.
-        </h2>
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Authentication - Sign-in -->
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+
+            <div class="d-flex flex-column flex-lg-row-fluid">
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid py-10">
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-1000px p-10 p-lg-15 mx-auto _box_shadow" style="border-radius: 6px;">
+                        
+                        <div class="d-flex align-items-center justify-content-center">
+
+                            <div class="position-relative w-md-400px me-md-2" style="display:inherit">
+                                <Input 
+                                    clearable @on-clear="onTextClear()" 
+                                    v-model="form.nid" type="text" prefix="ios-search" 
+                                    placeholder="Give your NID no."
+                                    style="margin-right: 5px"
+                                    show-word-limit maxlength="17"
+                                />
+                                
+                                <Button 
+                                    @click="searchRegistration()" 
+                                    :loading="isLoading" :disabled="isLoading" 
+                                    type="primary">
+                                    {{ isLoading ? 'Please wait . . .' : 'Submit'}}
+                                </Button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="border-gray-100 border-bottom-dashed py-5"></div>
+
+                        <div v-if="regStatus">
+                            <div class="text-center py-5">
+                                <span class="badge badge-success" style="font-size:26px">Registration Status</span>
+                            </div>
+
+                            <table>
+                                <tr>
+                                    <th>Scheduled Date</th>
+                                    <td>{{ regStatus.scheduled_date }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Center name</th>
+                                    <td>{{ regStatus.center_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Registration Status</th>
+                                    <td><span class="badge badge-primary">{{ regStatus.registration_status }}</span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div v-else class="_login_redirect">
+                            <router-link to="/vaccine-registration">
+                                Haven't register yet ? Please register.
+                            </router-link>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </template>
+
 <script>
+
 export default {
-    name: 'home'
+    name: 'Home',
+    data() {
+        
+        return {
+            form: {
+                nid: null,
+            },
+            isLoading: false,
+            regStatus: null,
+        };
+    },
+
+    methods: {
+        async searchRegistration() {
+            this.regStatus = null;
+            if (!this.form.nid) {
+                this.i('Please enter your nid');
+                return;
+            }
+            
+            const res = await this.callApi('POST', '/show-registration', this.form);
+            if (res.data.success) {
+                this.regStatus = res.data.json_data;
+            }
+        },
+        onTextClear() {
+            this.regStatus = null;
+        }
+    },
 }
 
 </script>
+
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+</style>

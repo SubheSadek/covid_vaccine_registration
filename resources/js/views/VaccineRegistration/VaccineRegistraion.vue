@@ -13,7 +13,7 @@
 
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
-                                <h1 class="text-dark mb-3">SignUp to Referral</h1>
+                                <h1 class="text-dark mb-3">Covid Vaccine Registration Form</h1>
                             </div>
                             
                             <Row :gutter="16">
@@ -118,7 +118,7 @@
 
                                 <Button :loading="isLoading" shape="circle" style="height: 51px;" :disabled="isLoading"
                                     @click="handleSubmit('form')" size="large" type="primary" long>
-                                    {{ isLoading ? 'Please wait ...' : 'Continue' }}
+                                    {{ isLoading ? 'Please wait ...' : 'Register' }}
                                 </Button>
 
                             </div>
@@ -139,7 +139,7 @@
 import SelectSearchOption from '../../Helpers/GlobalComponents/selectSearchOption.vue';
 import { form, ruleValidate } from './Js/registration'
 export default {
-    name: 'SignUp',
+    name: 'VaccineRegistration',
     components: {
         SelectSearchOption
     },
@@ -160,7 +160,7 @@ export default {
                     const formData = this.formatFormData(this.form);
                     const res = await this.callApi('POST', '/register-vccine', formData);
                     if (res.status == 200) {
-                        // window.location.href = "/";
+                        window.location.href = "/";
                     }
                     this.isLoading = false;
                 }
@@ -175,10 +175,6 @@ export default {
         }
     },
     created() {
-        let code = this.$route.query.code || null;
-        if (code) {
-            this.form.referred_code = code;
-        }
     }
 }
 
