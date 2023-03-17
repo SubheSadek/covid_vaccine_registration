@@ -74,4 +74,13 @@ class VaccineRegistrationService
 
         return $date;
     }
+
+    public function emailData($reg)
+    {
+        return [
+            'name'  => $reg->name,
+            'email' => $reg->email,
+            'scheduled_date' => $reg->scheduled_date,
+        ];
+    }
 }

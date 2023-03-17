@@ -4,8 +4,11 @@ namespace App\Http\Controllers\VaccineRegistration;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VaccineRegistrationRequest;
+use App\Mail\VaccineNotification;
 use App\Models\VaccineRegistration;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class VaccineRegistrationController extends Controller
 {
@@ -25,6 +28,7 @@ class VaccineRegistrationController extends Controller
      * @param VaccineRegistrationRequest $request The request object containing the vaccine registration data.
      * @return mixed Returns a success message if the registration is successful. Otherwise, returns an error message with the exception message.
      * @throws \Exception Throws an exception if an error occurs during the registration process.
+     * 
      */
 
     public function registerVaccine(VaccineRegistrationRequest $request)
@@ -34,7 +38,15 @@ class VaccineRegistrationController extends Controller
         DB::beginTransaction();
         try {
             $requestData['scheduled_date'] = $this->regService->getNextAvailableDateForCenter((int) $requestData['vaccine_center_id']);
-            VaccineRegistration::create($requestData);
+            $registration = VaccineRegistration::create($requestData);
+            $emailData = $this->regService->emailData($registration);
+
+            // We're creating a Carbon instance with the vaccination date, subtracting one day, setting the time to 9 PM,
+            // and converting it to the Bangladesh time zone. We're then queuing a new instance of the VaccineNotification
+            // mail class to be sent to the user at the specified notification time.
+
+            $notification_time = Carbon::parse($emailData['scheduled_date'])->subDay()->setTimezone('Asia/Dhaka')->setTime(21, 0, 0);
+            Mail::to($emailData['email'])->later($notification_time, new VaccineNotification($emailData));
             DB::commit();
             return withSuccess(null, 'Registration Successful');
         } catch (\Exception $e) {
