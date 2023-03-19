@@ -95,6 +95,8 @@ sail npm install && sail npm run dev
 sail artisan queue:work
 ```
 
+<b> Note: </b> I used database for Queue Connection.
+
 2. Setup your SMTP email server:
 
 ![Alt Text](https://github.com/SubheSadek/repo_images/blob/main/smtp_mail_setup.png)
