@@ -61,8 +61,7 @@ class VaccineRegistrationController extends Controller
 
     public function showRegistration(ShowRegistrationRequest $request)
     {
-        $requestData = $request->validated();
-        $registration = VaccineRegistration::where($requestData)
+        $registration = VaccineRegistration::where($request->validated())
             ->with('center:id,center_name')
             ->first(['id', 'scheduled_date', 'vaccine_center_id', 'registration_status']);
 
