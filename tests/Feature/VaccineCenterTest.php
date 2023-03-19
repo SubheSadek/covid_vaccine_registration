@@ -4,12 +4,12 @@ namespace Tests\Feature;
 
 use Database\Factories\VaccineCenterFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class VaccineCenterTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */

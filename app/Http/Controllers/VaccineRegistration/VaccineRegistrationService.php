@@ -63,7 +63,7 @@ class VaccineRegistrationService
         // Check if the given date falls on a weekend (Friday or Saturday).
         $dayOfWeek = date('w', strtotime($date));
         if ($dayOfWeek == 5 || $dayOfWeek == 6) {
-            $date = date(Utility::DATE_FORMAT, strtotime($date.' next weekday'));
+            $date = date(Utility::DATE_FORMAT, strtotime($date.' next sunday'));
         }
 
         return $date;

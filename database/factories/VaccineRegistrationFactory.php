@@ -17,11 +17,12 @@ class VaccineRegistrationFactory extends Factory
     public function definition(): array
     {
         $center = VaccineCenterFactory::new()->create();
+
         return [
             'vaccine_center_id' => $center->id,
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
-            'phone' => '+88017' . fake()->randomNumber(8, true),
+            'phone' => '+88017'.fake()->randomNumber(8, true),
             'nid' => (string) fake()->numberBetween(pow(10, 16), pow(10, 17) - 1),
             'address' => fake()->address(),
             'birth_date' => fake()->date(),
