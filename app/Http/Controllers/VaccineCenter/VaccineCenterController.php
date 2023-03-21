@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\VaccineCenter;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\VaccineCenterResource;
 use App\Models\VaccineCenter;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,8 @@ class VaccineCenterController extends Controller
             $q->where('id', '<', $lastId);
         })
             ->limit(10)->latest('id')
-            ->get(['id as value', 'center_name as name', 'vaccine_per_day']);
+            ->get(['id', 'center_name', 'vaccine_per_day']);
 
-        return withSuccess($centers);
+        return withSuccess(VaccineCenterResource::collection($centers));
     }
 }

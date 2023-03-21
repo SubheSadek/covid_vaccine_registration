@@ -26,7 +26,7 @@ class VaccineRegistrationService
         }
 
         // If there are no scheduled dates for the given center, return the next day as the available date.
-        if (!$latestDate) {
+        if (! $latestDate) {
             $nextDate = date(Utility::DATE_FORMAT, strtotime(Utility::ONE_DAY));
 
             return $this->getNextNonWeekendDay($nextDate);
@@ -35,7 +35,7 @@ class VaccineRegistrationService
         // If the daily vaccine limit has been reached, return the next available date.
         $registrationCount = VaccineRegistration::where('scheduled_date', $latestDate)->count();
         if ($registrationCount >= $vaccineLimit) {
-            $nextDate = date(Utility::DATE_FORMAT, strtotime($latestDate . Utility::ONE_DAY));
+            $nextDate = date(Utility::DATE_FORMAT, strtotime($latestDate.Utility::ONE_DAY));
 
             return $this->getNextNonWeekendDay($nextDate);
         }
@@ -57,13 +57,13 @@ class VaccineRegistrationService
     {
         // If the date is today, set it to tomorrow
         if ($date === date(Utility::DATE_FORMAT)) {
-            $date = date(Utility::DATE_FORMAT, strtotime($date . Utility::ONE_DAY));
+            $date = date(Utility::DATE_FORMAT, strtotime($date.Utility::ONE_DAY));
         }
 
         // Check if the given date falls on a weekend (Friday or Saturday).
         $dayOfWeek = date('w', strtotime($date));
         if ($dayOfWeek == 5 || $dayOfWeek == 6) {
-            $date = date(Utility::DATE_FORMAT, strtotime($date . ' next sunday'));
+            $date = date(Utility::DATE_FORMAT, strtotime($date.' next sunday'));
         }
 
         return $date;
