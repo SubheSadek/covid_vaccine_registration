@@ -1,14 +1,17 @@
-const form = {
-    vaccine_center_id: 2,
+import { reactive, ref } from "vue";
+import { info, callApi } from "../../../Helpers/apiService.js";
+
+export const form = reactive({
+    vaccine_center_id: "",
     name: "",
     phone: "",
     email: "",
     nid: "",
     address: "",
     birth_date: "",
-};
+});
 
-const ruleValidate = {
+export const ruleValidate = reactive({
     name: [
         { required: true, message: "Please input your name", trigger: "blur" },
         {
@@ -46,6 +49,30 @@ const ruleValidate = {
             trigger: "blur",
         },
     ],
-};
+});
 
-export { form, ruleValidate };
+export const centers = ref([]);
+
+export const isLoading = ref(false);
+
+// export const handleSubmit = (name) => {
+//     this.$refs[name].validate(async (valid) => {
+//         if (valid) {
+//             this.isLoading = true;
+
+//             const formData = this.formatFormData(this.form);
+//             const res = await this.callApi('POST', '/register-vccine', formData);
+//             if (res.status == 200) {
+//                 window.location.href = "/";
+//             }
+//             this.isLoading = false;
+//         }
+//     })
+// }
+// handleReset(name) {
+//     this.$refs[name].resetFields();
+// },
+// formatFormData(formData) {
+//     formData['email'] = formData.email.toLowerCase();
+//     return formData;
+// }

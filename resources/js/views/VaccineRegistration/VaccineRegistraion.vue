@@ -135,8 +135,26 @@
     </div>
 </template>
 
-<script>
-import SelectSearchOption from '../../Helpers/GlobalComponents/selectSearchOption.vue';
+<script setup>
+import SelectSearchOption from '../../Helpers/GlobalComponents/SelectSearchOption.vue';
+import {
+    Row,
+    Col,
+    Form,
+    FormItem,
+    Input,
+    Button,
+    DatePicker
+} from "view-ui-plus";
+import {
+    form,
+    ruleValidate,
+    centers,
+    isLoading
+} from "./Js/vaccine_registration.js";
+</script>
+<!-- <script>
+
 import { form, ruleValidate } from './Js/registration'
 export default {
     name: 'VaccineRegistration',
@@ -178,4 +196,4 @@ export default {
     }
 }
 
-</script>
+</script> -->

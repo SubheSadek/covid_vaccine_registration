@@ -18,10 +18,12 @@
                                     placeholder="Give your NID no."
                                     style="margin-right: 5px"
                                     show-word-limit maxlength="17"
+                                    size="large"
                                 />
                                 
                                 <Button 
                                     @click="searchRegistration()" 
+                                    size="large"
                                     :loading="isLoading" :disabled="isLoading" 
                                     type="primary">
                                     {{ isLoading ? 'Please wait . . .' : 'Submit'}}
@@ -70,39 +72,18 @@
     </div>
 </template>
 
-<script>
-
-export default {
-    name: 'Home',
-    data() {
-        
-        return {
-            form: {
-                nid: null,
-            },
-            isLoading: false,
-            regStatus: null,
-        };
-    },
-
-    methods: {
-        async searchRegistration() {
-            this.regStatus = null;
-            if (!this.form.nid) {
-                this.i('Please enter your nid');
-                return;
-            }
-            
-            const res = await this.callApi('POST', '/show-registration', this.form);
-            if (res.data.success) {
-                this.regStatus = res.data.json_data;
-            }
-        },
-        onTextClear() {
-            this.regStatus = null;
-        }
-    },
-}
+<script setup>
+import {
+    Input,
+    Button
+} from "view-ui-plus"
+import {
+    form,
+    isLoading,
+    regStatus,
+    searchRegistration,
+    onTextClear
+} from './JS/home'
 
 </script>
 
