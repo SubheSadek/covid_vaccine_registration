@@ -1,4 +1,4 @@
-# CovidVaccineRegistrationTestProject
+# CovidVaccineRegistrationSampleProject
 
 This is a sample project for covid vaccine registration with Laravel 10, Vue.js 3, Vite.
 
