@@ -1,24 +1,35 @@
 import { reactive, ref } from "vue";
 import { info, callApi } from "../../../Helpers/apiService.js";
-export const form = reactive({
-    nid: null,
-});
-export const isLoading = ref(false);
-export const regStatus = ref("");
 
-export const searchRegistration = async () => {
-    regStatus.value = null;
-    if (!form.nid) {
-        info("Please enter your nid");
-        return;
-    }
+export function useHome() {
+    const formValue = reactive({
+        nid: null,
+    });
+    const isLoading = ref(false);
+    const regInfo = ref("");
 
-    const res = await callApi("POST", "/show-registration", form);
-    if (res.data.success) {
-        regStatus.value = res.data.json_data;
-    }
-};
+    const searchRegistration = async () => {
+        regInfo.value = null;
+        if (!formValue.nid) {
+            info("Please enter your nid");
+            return;
+        }
 
-export const onTextClear = () => {
-    regStatus.value = null;
-};
+        const res = await callApi("POST", "/show-registration", formValue);
+        if (res.data.success) {
+            regInfo.value = res.data.json_data;
+        }
+    };
+
+    const onTextClear = () => {
+        regInfo.value = null;
+    };
+
+    return {
+        formValue,
+        isLoading,
+        regInfo,
+        searchRegistration,
+        onTextClear,
+    };
+}

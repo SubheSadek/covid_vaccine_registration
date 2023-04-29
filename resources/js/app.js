@@ -4,11 +4,9 @@ import Apps from "./App.vue";
 import svgIcons from "./Helpers/globalSvgIcons.vue";
 
 import router from "./router";
-import store from "./store";
 import "view-ui-plus/dist/styles/viewuiplus.css";
 import globals from "./Helpers/globals";
 const app = createApp({});
-app.use(store);
 app.use(router);
 
 app.mixin(globals);

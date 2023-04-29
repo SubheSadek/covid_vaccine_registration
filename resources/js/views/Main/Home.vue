@@ -14,7 +14,7 @@
                             <div class="position-relative w-md-400px me-md-2" style="display:inherit">
                                 <Input 
                                     clearable @on-clear="onTextClear()" 
-                                    v-model="form.nid" type="text" prefix="ios-search" 
+                                    v-model="formValue.nid" type="text" prefix="ios-search" 
                                     placeholder="Give your NID no."
                                     style="margin-right: 5px"
                                     show-word-limit maxlength="17"
@@ -35,7 +35,7 @@
 
                         <div class="border-gray-100 border-bottom-dashed py-5"></div>
 
-                        <div v-if="regStatus">
+                        <div v-if="regInfo">
                             <div class="text-center py-5">
                                 <span class="badge badge-success" style="font-size:26px">Registration Status</span>
                             </div>
@@ -43,15 +43,15 @@
                             <table>
                                 <tr>
                                     <th>Scheduled Date</th>
-                                    <td>{{ regStatus.scheduled_date }}</td>
+                                    <td>{{ regInfo.scheduled_date }}</td>
                                 </tr>
                                 <tr>
                                     <th>Center name</th>
-                                    <td>{{ regStatus.center_name }}</td>
+                                    <td>{{ regInfo.center_name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Registration Status</th>
-                                    <td><span class="badge badge-primary">{{ regStatus.registration_status }}</span></td>
+                                    <td><span class="badge badge-primary">{{ regInfo.registration_status }}</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -73,17 +73,20 @@
 </template>
 
 <script setup>
+
+//Composition Api
 import {
     Input,
     Button
 } from "view-ui-plus"
-import {
-    form,
+import { useHome } from './JS/home';
+const {
+    formValue,
     isLoading,
-    regStatus,
+    regInfo,
     searchRegistration,
     onTextClear
-} from './JS/home'
+} = useHome();
 
 </script>
 

@@ -9,7 +9,7 @@
                     <!--begin::Wrapper-->
                     <div class="w-lg-1000px p-10 p-lg-15 mx-auto _box_shadow" style="border-radius: 6px;">
                         <!--begin::Form-->
-                        <Form ref="form" :model="form" :rules="ruleValidate" class="form w-100">
+                        <Form ref="formRef" :model="formValue" :rules="ruleValidate" class="form w-100">
 
                             <div class="text-center mb-10">
                                 <!--begin::Title-->
@@ -22,7 +22,7 @@
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Name" prop="name">
                                             <Input 
                                                 show-word-limit maxlength="255"
-                                                v-model.trim="form.name" 
+                                                v-model.trim="formValue.name" 
                                                 type="text" placeholder="Name"
                                                 autocomplete="off" size="large">
                                             </Input>
@@ -35,7 +35,7 @@
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Email" prop="email">
                                             <Input 
                                                 show-word-limit maxlength="255"
-                                                v-model.trim="form.email" 
+                                                v-model.trim="formValue.email" 
                                                 type="text" placeholder="Email"
                                                 autocomplete="off" size="large">
                                             </Input>
@@ -48,7 +48,7 @@
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Phone (+8801700000000)" prop="phone">
                                             <Input 
                                                 show-word-limit maxlength="14"
-                                                v-model.trim="form.phone" 
+                                                v-model.trim="formValue.phone" 
                                                 type="text" placeholder="+8801700000000"
                                                 autocomplete="off"  size="large">
                                             </Input>
@@ -61,7 +61,7 @@
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="NID" prop="nid">
                                             <Input 
                                                 show-word-limit maxlength="17"
-                                                v-model.trim="form.nid" 
+                                                v-model.trim="formValue.nid" 
                                                 type="text" placeholder="NID"
                                                 autocomplete="off" size="large">
                                             </Input>
@@ -74,8 +74,8 @@
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Birth Date" prop="birth_date">
                                             
                                                 <DatePicker
-                                                    @on-change="e => form.birth_date = e"
-                                                    :model-value="form.birth_date"
+                                                    @on-change="e => formValue.birth_date = e"
+                                                    :model-value="formValue.birth_date"
                                                     format="yyyy-MM-dd" clearable type="date"
                                                     placeholder="Select birth date"
                                                     style="width: 100%" size="large"
@@ -90,7 +90,7 @@
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Vaccine Center" prop="vaccine_center_id">
                                             
                                             <SelectSearchOption
-                                                v-model:formValue="form.vaccine_center_id"
+                                                v-model:formValue="formValue.vaccine_center_id"
                                                 :initialData="centers"
                                                 :title="`Search by center name`"
                                                 :url="`vaccine-center-list`"
@@ -104,7 +104,7 @@
                                     <div class="fv-row mb-10">
                                         <FormItem class="form-label fs-6 fw-bolder text-dark" label="Address" prop="address">
                                             <Input 
-                                            v-model.trim="form.address" :rows="4" type="textarea"
+                                            v-model.trim="formValue.address" :rows="4" type="textarea"
                                             placeholder="e.g. House 10, Road 1/A, Block A&#10;Mohammadpur, Dhaka - 1207"
                                             autocomplete="off">
                                             </Input>
@@ -117,7 +117,7 @@
                             <div class="text-center">
 
                                 <Button :loading="isLoading" shape="circle" style="height: 51px;" :disabled="isLoading"
-                                    @click="handleSubmit('form')" size="large" type="primary" long>
+                                    @click="handleSubmit()" size="large" type="primary" long>
                                     {{ isLoading ? 'Please wait ...' : 'Register' }}
                                 </Button>
 
@@ -146,54 +146,17 @@ import {
     Button,
     DatePicker
 } from "view-ui-plus";
-import {
-    form,
+import { useVaccineRegistration } from "./Js/vaccine_registration";
+
+const {
+    formValue,
     ruleValidate,
     centers,
-    isLoading
-} from "./Js/vaccine_registration.js";
+    isLoading,
+    handleSubmit,
+    handleReset,
+    formRef
+} = useVaccineRegistration();
+
 </script>
-<!-- <script>
 
-import { form, ruleValidate } from './Js/registration'
-export default {
-    name: 'VaccineRegistration',
-    components: {
-        SelectSearchOption
-    },
-    data() {
-        return {
-            form,
-            ruleValidate,
-            centers: [],
-        };
-    },
-
-    methods: {
-        handleSubmit(name) {
-            this.$refs[name].validate(async (valid) => {
-                if (valid) {
-                    this.isLoading = true;
-
-                    const formData = this.formatFormData(this.form);
-                    const res = await this.callApi('POST', '/register-vccine', formData);
-                    if (res.status == 200) {
-                        window.location.href = "/";
-                    }
-                    this.isLoading = false;
-                }
-            })
-        },
-        handleReset(name) {
-            this.$refs[name].resetFields();
-        },
-        formatFormData(formData) {
-            formData['email'] = formData.email.toLowerCase();
-            return formData;
-        }
-    },
-    created() {
-    }
-}
-
-</script> -->
