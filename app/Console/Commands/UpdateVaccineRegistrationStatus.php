@@ -29,6 +29,6 @@ class UpdateVaccineRegistrationStatus extends Command
      */
     public function handle(): void
     {
-        (new GlobalService)->updateStatusIfExceed();
+        (new GlobalService)->updateStatusWhenScheduledDateExpired();
     }
 }

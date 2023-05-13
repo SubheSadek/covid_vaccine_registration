@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\VaccineCenter;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VaccineCenterResource;
@@ -15,7 +15,7 @@ class VaccineCenterController extends Controller
         $search = $request['search'] ?? null;
         $lastId = $request['lastId'] ?? null;
         $centers = VaccineCenter::when($search, function ($q, $search) {
-            $q->where('center_name', 'like', '%'.$search.'%');
+            $q->where('center_name', 'like', '%' . $search . '%');
         })->when($lastId, function ($q, $lastId) {
             $q->where('id', '<', $lastId);
         })

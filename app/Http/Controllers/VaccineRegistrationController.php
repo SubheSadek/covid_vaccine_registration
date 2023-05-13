@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\VaccineRegistration;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShowRegistrationRequest;
@@ -8,6 +8,7 @@ use App\Http\Requests\VaccineRegistrationRequest;
 use App\Http\Resources\RegistrationResource;
 use App\Mail\VaccineNotification;
 use App\Models\VaccineRegistration;
+use App\Services\VaccineRegistrationService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;

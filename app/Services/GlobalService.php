@@ -6,7 +6,7 @@ use App\Models\VaccineRegistration;
 
 class GlobalService
 {
-    public function updateStatusIfExceed(): void
+    public function updateStatusWhenScheduledDateExpired(): void
     {
         VaccineRegistration::where('scheduled_date', '<=', now())
             ->update([
